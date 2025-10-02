@@ -1,3 +1,4 @@
+import argparse 
 import numpy as np
 import pandas as pd
 from datasets import load_dataset 
@@ -17,6 +18,12 @@ import warnings
 
 from padie.core.constants import LANGUAGES
 # from padie.core.utils import load_and_inspect_dataset
+
+# Parse arguments 
+parser = argparse.ArgumentParser()
+parser.add_argument("--sanity_test", action = "store_true", help="Run a small sanity check instead of full training")
+args = parser.parse_args()
+
 
 # -----------------------------------------------------------------------------
 # Constants & Configurations
@@ -182,6 +189,10 @@ def main():
         "eval": "datasets/language_detection/eval_dataset.jsonl",
     }
 )
+    if args.sanity_check:
+        datasets["train"] = datasets["train"].shuffle(seed=42).select(range(500))
+        datasets["eval"] = datasets["eval"].shuffle(seed=42).select(range(100))
+    
     train_dataset = datasets["train"]
     eval_dataset = datasets["eval"]
 
@@ -217,24 +228,39 @@ def main():
     class_weights = calculate_class_weights(train_dataset).to(device)
 
     # 6. Training Arguments
-    training_args = TrainingArguments(
-        output_dir=MODEL_OUTPUT_DIR,
-        eval_strategy="epoch",
-        save_strategy="epoch",
-        learning_rate=3e-5,
-        per_device_train_batch_size=32,
-        per_device_eval_batch_size=32,
-        num_train_epochs=5,
-        weight_decay=0.01,
-        logging_dir="./logs",
-        load_best_model_at_end=True,
-        seed=SEED,
-        logging_strategy="steps",  # log at regular intervals
-        logging_steps=50,   # less frequence logging, keeps training smooth
-        fp16=True,          # enable mixed precision (speeds up on T4)
-        gradient_accumulation_steps=1,  # can increase if VRAM is tight
-        dataloader_num_workers=2,       # use CPU threads to feed the GPU faster
-    )
+    if args.sanity_check:
+        training_args = TrainingArguments(
+            output_dir=MODEL_OUTPUT_DIR,
+            eval_strategy="steps",
+            save_strategy="no",
+            learning_rate=5e-5,
+            per_device_train_batch_size=4,
+            per_device_eval_batch_size=4,
+            num_train_epochs=1,
+            logging_dir="./logs",
+            seed=42,
+            logging_steps=5,   # less frequence logging, keeps training smooth
+            fp16=True,          # enable mixed precision (speeds up on T4)
+        )
+    else:
+        training_args = TrainingArguments(
+            output_dir=MODEL_OUTPUT_DIR,
+            eval_strategy="epoch",
+            save_strategy="epoch",
+            learning_rate=3e-5,
+            per_device_train_batch_size=32,
+            per_device_eval_batch_size=32,
+            num_train_epochs=5,
+            weight_decay=0.01,
+            logging_dir="./logs",
+            load_best_model_at_end=True,
+            seed=SEED,
+            logging_strategy="steps",  # log at regular intervals
+            logging_steps=50,   # less frequence logging, keeps training smooth
+            fp16=True,          # enable mixed precision (speeds up on T4)
+            gradient_accumulation_steps=1,  # can increase if VRAM is tight
+            dataloader_num_workers=2,       # use CPU threads to feed the GPU faster
+        )
 
     # 7. Data Collator
     data_collator = DataCollatorWithPadding(tokenizer)
