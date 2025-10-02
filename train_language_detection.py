@@ -21,7 +21,7 @@ from padie.core.constants import LANGUAGES
 
 # Parse arguments 
 parser = argparse.ArgumentParser()
-parser.add_argument("--sanity_test", action = "store_true", help="Run a small sanity check instead of full training")
+parser.add_argument("--sanity_check", action = "store_true", help="Run a small sanity check instead of full training")
 args = parser.parse_args()
 
 
