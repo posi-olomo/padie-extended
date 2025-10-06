@@ -241,6 +241,8 @@ def main():
             seed=42,
             logging_steps=5,   # less frequence logging, keeps training smooth
             fp16=True,          # enable mixed precision (speeds up on T4)
+            metric_for_best_model = "f1" # considering that there isn't an even distribution of the languages.
+            greater_is_better = True
         )
     else:
         training_args = TrainingArguments(
