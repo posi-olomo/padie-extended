@@ -241,8 +241,8 @@ def main():
             seed=42,
             logging_steps=5,   # less frequence logging, keeps training smooth
             fp16=True,          # enable mixed precision (speeds up on T4)
-            metric_for_best_model = "f1" # considering that there isn't an even distribution of the languages.
-            greater_is_better = True
+            metric_for_best_model = "f1", # considering that there isn't an even distribution of the languages.
+            greater_is_better = True,
         )
     else:
         training_args = TrainingArguments(
@@ -262,6 +262,8 @@ def main():
             fp16=True,          # enable mixed precision (speeds up on T4)
             gradient_accumulation_steps=1,  # can increase if VRAM is tight
             dataloader_num_workers=2,       # use CPU threads to feed the GPU faster
+            metric_for_best_model = "f1", # considering that there isn't an even distribution of the languages.
+            greater_is_better = True,
         )
 
     # 7. Data Collator
