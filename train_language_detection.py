@@ -22,6 +22,7 @@ from padie.core.constants import LANGUAGES
 # Parse arguments 
 parser = argparse.ArgumentParser()
 parser.add_argument("--sanity_check", action = "store_true", help="Run a small sanity check instead of full training")
+parser.add_argument("--smoke_test", action = "store_true", help="Run a smoke test on the GPU instance.")
 args = parser.parse_args()
 
 
@@ -189,9 +190,11 @@ def main():
         "eval": "datasets/language_detection/eval_dataset.jsonl",
     }
 )
-    if args.sanity_check:
-        datasets["train"] = datasets["train"].shuffle(seed=42).select(range(500))
-        datasets["eval"] = datasets["eval"].shuffle(seed=42).select(range(100))
+    if args.sanity_check or args.smoke_test:
+        train_size = 500 if args.sanity_check else 1000
+        eval_size = 100 if args.sanity_check else 200
+        datasets["train"] = datasets["train"].shuffle(seed=42).select(range(train_size))
+        datasets["eval"] = datasets["eval"].shuffle(seed=42).select(range(eval_size))
     
     train_dataset = datasets["train"]
     eval_dataset = datasets["eval"]
@@ -242,6 +245,23 @@ def main():
             logging_steps=5,   # less frequence logging, keeps training smooth
             fp16=True,          # enable mixed precision (speeds up on T4)
             metric_for_best_model = "f1", # considering that there isn't an even distribution of the languages.
+            greater_is_better = True,
+        )
+    elif args.smoke_test:
+        training_args = TrainingArguments(
+            output_dir = MODEL_OUTPUT_DIR,
+            eval_strategy= "steps",
+            save_strategy = "no",
+            learning_rate = 5e-5,
+            per_device_train_batch_size = 8,
+            per_device_eval_batch_size = 8,
+            num_train_epochs = 1,
+            fp16 = True, # ensure GPU mixed precision
+            logging_dir = "./logs",
+            logging_steps = 5,
+            seed = SEED,
+            dataloader_num_workers = 2,
+            metric_for_best_model = "f1",
             greater_is_better = True,
         )
     else:
