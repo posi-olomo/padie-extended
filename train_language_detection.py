@@ -191,8 +191,8 @@ def main():
     }
 )
     if args.sanity_check or args.smoke_test:
-        train_size = 500 if args.sanity_check else 1000
-        eval_size = 100 if args.sanity_check else 200
+        train_size = 500 if args.sanity_check else 20000
+        eval_size = 100 if args.sanity_check else 4000
         datasets["train"] = datasets["train"].shuffle(seed=42).select(range(train_size))
         datasets["eval"] = datasets["eval"].shuffle(seed=42).select(range(eval_size))
     
