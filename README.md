@@ -7,7 +7,7 @@
 
 **Padie** is an evolving, open-source Python package designed to predict Nigerian languages, including **Pidgin**, **Yoruba**, **Hausa**, and **Igbo**. It aims to provide AI-powered tools for **language detection**, while fostering community collaboration to enhance its capabilities.
 
-> **🔧 Note:** Padie-extended is a work in progress. It is an extension developed by Ayooluwaposi Olomo, building upon the original![Padie repository](https://github.com/sir-temi/Padie) by @sir-temi and @pythonisoft. Their open-source work laid the foundation for this project. Contributions are welcome. Be sure to check out their repository!
+> **🔧 Note:** Padie-extended is a work in progress. It is an extension developed by Ayooluwaposi Olomo, building upon the original [Padie repository](https://github.com/sir-temi/Padie) by @sir-temi and @pythonisoft. Their open-source work laid the foundation for this project. Contributions are welcome. Be sure to check out their repository!
 
 ---
 
@@ -17,13 +17,13 @@
     Automatically identify the language of input text across supported Nigerian languages.
 
 -   🧑‍🤝‍🧑 **Community Contributions**  
-    An open platform for developers, linguists, and AI enthusiasts to contribute datasets, models, and features.
+    An open platform for developers, linguists, and AI enthusiasts to contribute models and features.
 
 ---
 
 ## 🚫 Dataset Contributions
 **Please do NOT submit datasets to this repository.** All dataset contributions 
-should be made to the [original Padie repository]([link](https://github.com/sir-temi/Padie)). This ensures all 
+should be made to the [original Padie repository](https://github.com/sir-temi/Padie). This ensures all 
 Padie-based projects benefit from your contributions.
 
 ## ✅ What You CAN Contribute Here:
