@@ -1,4 +1,4 @@
-# 🌟 **padie-extended** 🌟
+# 👩🏿 **padie-extended** 👩🏿
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Status](https://img.shields.io/badge/status-in%20progress-yellow.svg)
