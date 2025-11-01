@@ -2,7 +2,7 @@ import json
 import glob
 
 def clean_text(text: str) -> str:
-    # Remove leading/trailing spaces and normaize spaes/newlines
+    # Remove leading/trailing spaces and normaize spaces/newlines
     return " ".join(text.split())
 
 def convert_to_jsonl(input_files, output_file):
