@@ -62,6 +62,7 @@ class LanguageDetector:
         Returns:
             Dictionary with:
                 - language: Predicted language or 'uncertain'
+                - all_scores: all_scores
                 - confidence: Confidence score (0-1)
                 - low_confidence: Boolean indicating if confidence is below threshold
                 - message: Warning message if confidence is low
@@ -72,6 +73,13 @@ class LanguageDetector:
             >>> print(result)
             {
                 'language': 'uncertain',
+                'all_scores': {
+                            'english': 0.3021,
+                            'pidgin': 0.2045,
+                            'hausa': 0.2450,
+                            'igbo': 0.2262,
+                            'yoruba': 0.0222
+                            },
                 'confidence': 0.45,
                 'low_confidence': True,
                 'message': 'Low confidence prediction. This might not be a Nigerian language.'
@@ -91,16 +99,18 @@ class LanguageDetector:
         threshold_to_use = threshold if threshold is not None else self.confidence_threshold 
 
         # Get prediction
-        result = self.pipeline(text)[0]
+        result = self.pipeline(text, top_k = None)
 
-        confidence = result['score']
-        predicted_language = result['label']
-
+        confidence = result[0]['score']
+        predicted_language = result[0]['label']
+        # a dictionary that sets key as the labels and value as the score
+        all_scores = {pred['label']:pred['score'] for pred in result}
+        
         # Check if confidence is below threshold
-
         if confidence < threshold_to_use:
             return {
                 'language': 'uncertain',
+                'all_scores': all_scores,
                 'confidence': confidence,
                 'low_confidence': True,
                 'message': f'Low confidence prediction ({confidence:.2%}). This might not be a Nigerian language.',
@@ -110,6 +120,7 @@ class LanguageDetector:
         # High confidence prediction 
         return {
             'language': predicted_language,
+            'all_scores': all_scores,
             'confidence': confidence,
             'low_confidence': False
             }
@@ -132,19 +143,20 @@ class LanguageDetector:
         threshold_to_use = threshold if threshold is not None else self.confidence_threshold
 
         # Get batch predictions
-        raw_results = self.pipeline(texts)
+        raw_results = self.pipeline(texts, top_k = None)
         
         # Process each result
         return [
             {
                 'language': 'uncertain',
-                'confidence': result['score'],
+                'confidence': result[0]['score'],
+                'all_scores': {pred['label']:pred['score'] for pred in result}
                 'low_confidence': True,
-                'message': f'Low confidence prediction ({result['score']:.2%}). This might not be a Nigerian language.'
-                'raw_prediction': result['label']
+                'message': f'Low confidence prediction ({result[0]['score']:.2%}). This might not be a Nigerian language.'
+                'raw_prediction': result[0]['label']
             } if result['score'] < threshold_to_use else {
-                'language': result['label'],
-                'confidence': result['score'],
+                'language': result[0]['label'],
+                'confidence': result[0]['score'],
                 'low_confidence': False
             }
             for result in raw_results
