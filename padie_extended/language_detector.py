@@ -26,15 +26,8 @@ class LanguageDetector:
                                     Predictions below this return a low confidence warning.
         """
         if model_path is None:
-            # model_path = "models/full/language_detection"
-            # The model_path is not hard coded as it is above because path is relative to wherever the user
-            # runs their script from. This can easily lead to errors. 
-            # You need the model_path to be relative to where the package is installed. 
-            import os
-            model_path = os.path.join(
-                os.path.dirname(__file__),
-                "models", "full", "language_detection"
-            )
+            # The model_path is my uploaded HuggingFace Model
+            model_path = "posi-olomo/padie-extended"
         
         self.confidence_threshold = confidence_threshold
 
@@ -150,11 +143,11 @@ class LanguageDetector:
             {
                 'language': 'uncertain',
                 'confidence': result[0]['score'],
-                'all_scores': {pred['label']:pred['score'] for pred in result}
+                'all_scores': {pred['label']:pred['score'] for pred in result},
                 'low_confidence': True,
-                'message': f'Low confidence prediction ({result[0]['score']:.2%}). This might not be a Nigerian language.'
+                'message': f'Low confidence prediction ({result[0]['score']:.2%}). This might not be a Nigerian language.',
                 'raw_prediction': result[0]['label']
-            } if result['score'] < threshold_to_use else {
+            } if result[0]['score'] < threshold_to_use else {
                 'language': result[0]['label'],
                 'confidence': result[0]['score'],
                 'low_confidence': False

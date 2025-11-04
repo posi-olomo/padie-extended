@@ -1,5 +1,5 @@
 import pytest
-from language_detector import LanguageDetector
+from padie_extended.language_detector import LanguageDetector
 
 # Load the model ONCE globally
 # This ensures the 1GB model is initialized a single time for all tests
@@ -7,7 +7,6 @@ from language_detector import LanguageDetector
 def detector():
     """Initialize LanguageDetector once per test session."""
     return LanguageDetector()
-
 
 def test_detect_single_text(detector):
     """Test detection for a single input string."""
@@ -18,10 +17,40 @@ def test_detect_single_text(detector):
     assert "confidence" in result
     assert isinstance(result["confidence"], float)
 
+def test_predict_english(detector):
+    """Test that English text is correctly identified."""
+    text = "Good morning, how are you doing today?"
+    result = detector.predict(text)
+    assert result["language"] == "english", f"Expected English but got {result['language']}"
+    assert result["confidence"] > 0.5, "Confidence should be reasonably high for clear English"
+
+
+def test_predict_yoruba(detector):
+    """Test that Yoruba text is correctly identified."""
+    text = "E kaaro, bawo ni?"
+    result = detector.predict(text)
+    assert result["language"] == "yoruba", f"Expected Yoruba but got {result['language']}"
+    assert result["confidence"] > 0.3, "Confidence should be reasonable for Yoruba greeting"
+
+
+def test_predict_igbo(detector):
+    """Test that Igbo text is correctly identified."""
+    text = "Nno, kedu ka i mere?"
+    result = detector.predict(text)
+    assert result["language"] == "igbo", f"Expected Igbo but got {result['language']}"
+    assert result["confidence"] > 0.3, "Confidence should be reasonable for Igbo greeting"
+
+
+def test_predict_hausa(detector):
+    """Test that Hausa text is correctly identified."""
+    text = "Sannu, yaya kake?"
+    result = detector.predict(text)
+    assert result["language"] == "hausa", f"Expected Hausa but got {result['language']}"
+    assert result["confidence"] > 0.3, "Confidence should be reasonable for Hausa greeting"
 
 def test_confidence_threshold(detector):
     """Ensure low-confidence predictions are handled correctly."""
-    uncertain_text = "Blahblahbluh"
+    uncertain_text = "Me llamo Posi."
     result = detector.predict(uncertain_text, threshold=0.9)
     assert result["low_confidence"] is True
     assert result["language"] == "uncertain"
