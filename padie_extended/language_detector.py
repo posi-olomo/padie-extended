@@ -103,8 +103,8 @@ class LanguageDetector:
         if confidence < threshold_to_use:
             return {
                 'language': 'uncertain',
-                'all_scores': all_scores,
                 'confidence': confidence,
+                'all_scores': all_scores,
                 'low_confidence': True,
                 'message': f'Low confidence prediction ({confidence:.2%}). This might not be a Nigerian language.',
                 'raw_prediction': predicted_language 
@@ -113,8 +113,8 @@ class LanguageDetector:
         # High confidence prediction 
         return {
             'language': predicted_language,
-            'all_scores': all_scores,
             'confidence': confidence,
+            'all_scores': all_scores,
             'low_confidence': False
             }
     
@@ -150,6 +150,7 @@ class LanguageDetector:
             } if result[0]['score'] < threshold_to_use else {
                 'language': result[0]['label'],
                 'confidence': result[0]['score'],
+                'all_scores': {pred['label']:pred['score'] for pred in result},
                 'low_confidence': False
             }
             for result in raw_results
