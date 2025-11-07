@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
 
-**padie-extemded** is an open-source Python package designed to predict Nigerian languages, including **Pidgin**, **Yoruba**, **Hausa**, and **Igbo**. It provides AI-powered tools for **language detection** and fosters community collaboration to enhance its capabilities.
+**padie-extended** is an open-source Python package designed to predict Nigerian languages, including **Pidgin**, **Yoruba**, **Hausa**, and **Igbo**. It provides AI-powered tools for **language detection** and fosters community collaboration to enhance its capabilities.
 
 #### **🔧 Note:** 
 Padie-extended is a work in progress. It is an extension developed by [Ayooluwaposi Olomo](https://www.linkedin.com/in/ayooluwaposi-olomo-7a322b185/), building upon the original [Padie repository](https://github.com/sir-temi/Padie) by [@sir-temi](https://github.com/sir-temi) and [@pythonisoft](https://github.com/pythonisoft). Their open-source work laid the foundation for this project. Contributions are welcome. Be sure to check out their repository!
