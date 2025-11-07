@@ -28,9 +28,33 @@ Padie-extended is a work in progress. It is an extension developed by [Ayooluwap
 should be made to the [original Padie repository](https://github.com/sir-temi/Padie). This ensures all 
 Padie-based projects benefit from your contributions.
 
-## ✅ What You CAN Contribute Here:
+## 🤝 How You Can Contribute:
 
-We welcome contributions from everyone—whether you're a developer, linguist, or data scientist! Here's how you can get involved:
+We welcome contributions from developers, linguists, and data scientists interested in improving Nigerian language technology.
+
+Here are some impactful ways you can help:
+
+- **Expand Language Coverage**:  
+  Add support for more Nigerian and African languages beyond those currently included.
+
+- **Improve Short-Form Text Handling**:  
+  The model performs better on long-form text. Training and fine-tuning it on short-form (social media, chat, etc.) data can boost performance.
+
+- **Optimize Inference Efficiency**:  
+  Reduce model size or latency for deployment on resource-limited environments (mobile, low-bandwidth servers).
+
+- **Enhance Evaluation Metrics**:  
+  Add multilingual or domain-specific benchmarks (e.g., dialectal variations, code-switching).
+
+- **Augment the Dataset**:  
+  Contribute curated, diverse, and balanced text data to the **main Padie repository**, not this one.
+
+- **Improve Documentation & Examples**:  
+  Add usage examples, Jupyter notebooks, or tutorials showing real-world use cases.
+
+---
+
+### 🧠 Quick Contribution Steps
 
 1. **Fork the Repository**:  
    Click the "Fork" button at the top of the repository page to create your copy.
@@ -62,7 +86,7 @@ We welcome contributions from everyone—whether you're a developer, linguist, o
     ```
 
 6. **Submit a Pull Request**:  
-   Open a pull request against the `main` branch with a clear description of your changes.
+   Open a pull request against the `dev` branch with a clear description of your changes.
 
 ---
 
@@ -188,8 +212,7 @@ Tested on a diverse dataset of Nigerian texts:
 
 
 ## Requirements [End User]
-If you’re using this package to detect languages in your own projects (not for model training or development), 
-you only need the following dependencies:
+If you’re using this package to detect languages in your own projects (not for model training or development), you only need the following dependencies:
 - Python 3.8+
 - PyTorch 2.0+
 - Transformers 4.30+
