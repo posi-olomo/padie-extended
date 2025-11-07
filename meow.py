@@ -1,4 +1,4 @@
-from padie_extended.language_detector import LanguageDetector
+from src.padie_extended.language_detector import LanguageDetector
 
 def test_predict_english(detector):
     """Test that English text is correctly identified."""

@@ -145,7 +145,7 @@ class LanguageDetector:
                 'confidence': result[0]['score'],
                 'all_scores': {pred['label']:pred['score'] for pred in result},
                 'low_confidence': True,
-                'message': f'Low confidence prediction ({result[0]['score']:.2%}). This might not be a Nigerian language.',
+                'message': f"Low confidence prediction ({result[0]['score']:.2%}). This might not be a Nigerian language.",
                 'raw_prediction': result[0]['label']
             } if result[0]['score'] < threshold_to_use else {
                 'language': result[0]['label'],

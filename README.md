@@ -96,6 +96,17 @@ Here are some impactful ways you can help:
 pip install padie-extended
 ```
 
+## 📋 Requirements [End User]
+If you’re using this package to detect languages in your own projects (not for model training or development), you only need the following dependencies:
+- Python 3.8+
+- PyTorch 2.0+
+- Transformers 4.30+
+- SentencePiece 0.1.99+
+
+```python
+pip install transformers[torch] sentencepiece
+```
+
 ## ⌛ Quick Start
 
 ```python
@@ -210,13 +221,6 @@ Tested on a diverse dataset of Nigerian texts:
 | F1 Score (weighted) | 95.3% |
 | Inference Speed | ~4.5 ms per text (measured on GPU) |
 
-
-## Requirements [End User]
-If you’re using this package to detect languages in your own projects (not for model training or development), you only need the following dependencies:
-- Python 3.8+
-- PyTorch 2.0+
-- Transformers 4.30+
-- SentencePiece 0.1.99+
 
 ## Use Cases
 
