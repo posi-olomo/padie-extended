@@ -5,10 +5,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
 
-**padie-extended** is an open-source Python package designed to predict Nigerian languages, including **Pidgin**, **Yoruba**, **Hausa**, and **Igbo**. It provides AI-powered tools for **language detection** and fosters community collaboration to enhance its capabilities.
+**padie-extended** is the 1st open-source Nigerian language text classifier package on PyPI. It is designed to predict Nigerian languages, including **Pidgin**, **Yoruba**, **Hausa**, and **Igbo**. It provides AI-powered tools for **language detection** and fosters community collaboration to enhance its capabilities.
 
 #### **🔧 Note:** 
-Padie-extended is a work in progress. It is an extension developed by [Ayooluwaposi Olomo](https://www.linkedin.com/in/ayooluwaposi-olomo-7a322b185/), building upon the original [Padie repository](https://github.com/sir-temi/Padie) by [@sir-temi](https://github.com/sir-temi) and [@pythonisoft](https://github.com/pythonisoft). Their open-source work laid the foundation for this project. Contributions are welcome. Be sure to check out their repository!
+padie-extended is a work in progress. It is an extension developed by [Ayooluwaposi Olomo](https://www.linkedin.com/in/ayooluwaposi-olomo-7a322b185/), building upon the original [Padie repository](https://github.com/sir-temi/Padie) by [@sir-temi](https://github.com/sir-temi) and [@pythonisoft](https://github.com/pythonisoft). Their open-source work laid the foundation for this project. Contributions are welcome. Be sure to check out their repository!
 
 ---
 
@@ -25,8 +25,7 @@ Padie-extended is a work in progress. It is an extension developed by [Ayooluwap
 
 ## 🚫 Dataset Contributions
 **Please do NOT submit datasets to this repository.** All dataset contributions 
-should be made to the [original Padie repository](https://github.com/sir-temi/Padie). This ensures all 
-Padie-based projects benefit from your contributions.
+should be made to the [original Padie repository](https://github.com/sir-temi/Padie). This ensures all Padie-based projects benefit from your contributions.
 
 ## 🤝 How You Can Contribute:
 
@@ -102,9 +101,10 @@ If you’re using this package to detect languages in your own projects (not for
 - PyTorch 2.0+
 - Transformers 4.30+
 - SentencePiece 0.1.99+
+- bitsandbytes 0.48.0+
 
 ```python
-pip install transformers[torch] sentencepiece
+pip install transformers[torch] sentencepiece bitsandbytes
 ```
 
 ## ⌛ Quick Start
