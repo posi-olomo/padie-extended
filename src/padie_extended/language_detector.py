@@ -32,12 +32,11 @@ class LanguageDetector:
         self.confidence_threshold = confidence_threshold
 
         # Initialize pipeline with auto device detection
-        device = 0 if torch.cuda.is_available() else -1
+        # device = 0 if torch.cuda.is_available() else -1
 
         self.pipeline = pipeline(
             "text-classification",
-            model = model_path,
-            device = device
+            model = model_path #, device = device
         )
 
     def predict(
